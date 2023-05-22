@@ -13,7 +13,7 @@ public class WordFrequencies {
         this.filepath = filepath;
     }
 
-
+//maybe change to where this count words method takes in the file instead of the constructor
     public Map<String, Integer> countWords(){
         List<String> words = readWords();
         //count the words
@@ -23,7 +23,7 @@ public class WordFrequencies {
          return wordCountMap;
     }
 
-    public void printWordStats(Map<String, Integer> wordCountMap) {
+    public void printWordStats() {
 
         topTenWords(wordCountMap);
 
@@ -41,11 +41,14 @@ public class WordFrequencies {
             List<Map.Entry<String, Integer>> entryList = new ArrayList<>(map.entrySet());
 
             // Sort the list based on the integer values in descending order
+//            entryList.sort(Map.Entry.comparingByValue());
+//            Collections.sort(entryList, Collections.reverseOrder());
             Collections.sort(entryList, new countComparator());
 
             // Get the top 10 entries (or less if the map has fewer than 10 entries)
             // 11 because you have to ignore ""
-            List<Map.Entry<String, Integer>> top10 = entryList.subList(0, Math.min(entryList.size(), 11));
+            //could do size minus 11 and size minus 1 and not use the comparator above this will effectively get the last 11 values then you could reverse order and then print them the same below
+            List<Map.Entry<String, Integer>> top10 = entryList.subList(0, 11);
 
             // Print the top 10 entries
             System.out.println("Top 10 most common words: ");
